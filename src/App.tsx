@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState,MouseEvent  } from 'react'
 import './App.css'
 
 function App() {
   const [modalFlag, setModalFlag] = useState<boolean>(false);
-
+  const [backgroundClickFlag, setBackGroundClickFlag] = useState<boolean>(true);
 
   useEffect(() => {
     const escKeyModalClose = (e:any) => {
@@ -16,14 +16,21 @@ function App() {
   }, [modalFlag]);
 
 
+  const handleBackgroundClick = (event:MouseEvent<HTMLDivElement>) => {
+    if ((event.target as HTMLDivElement).className === 'modal' && backgroundClickFlag) {
+      setModalFlag(false);
+    }
+  };
+
   return (
     <>
       <button type="button" onClick={() => setModalFlag(!modalFlag)} className="btn btn-primary">
         Launch demo modal
       </button>
-
+      <input type='checkbox' id='check' onClick={() => setBackGroundClickFlag(!backgroundClickFlag)}></input>
+      <label >배경 클릭 시 모달 창 안닫히게</label>
       {modalFlag ?
-        <div className="modal" >
+        <div className="modal" onClick={handleBackgroundClick} >
           <div className="modal-content">
             <span className="close" onClick={() => setModalFlag(!modalFlag)}>&times;</span>
             <h2>Modal title</h2>
@@ -33,6 +40,7 @@ function App() {
           </div>
         </div>
         : null}
+      
     </>
   )
 }
