@@ -26,8 +26,13 @@ export const First = () => {
         <div className="container">
             <h3>첫번째 문제</h3>
             <label>숫자를 입력해주세요</label>
-            <input type="number" value={number} onChange={(e) => setNumber(parseInt(e.target.value))} />
-            <button onClick={() => drawSquare(number)}>입력</button>
+            <div>
+                <input type="text" value={number} onChange={(e) => {
+                    const value = e.target.value;
+                    setNumber(value === '' ? 0 : parseInt(value));
+                }} />
+                <button onClick={() => drawSquare(number)}>입력</button>
+            </div>
             {square.map((row, rid) => (
                 <div key={rid}>
                     {row.map((col, cid) => (
