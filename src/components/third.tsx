@@ -1,6 +1,6 @@
 import { useEffect, useState, MouseEvent } from 'react'
 
-export const Third = () => {
+function Third ()  {
     const [modalFlag, setModalFlag] = useState<boolean>(false);
     const [backgroundClickFlag, setBackGroundClickFlag] = useState<boolean>(true);
 
@@ -10,11 +10,22 @@ export const Third = () => {
                 setModalFlag(false);
             }
         }; // esc key를 눌렀을 때 Modal 창 close
-        window.addEventListener('keydown', escKeyModalClose); // 위에 만들어 놓은 escKeyModalClose를 keydown했을 때 이벤트로 등록한다. 즉, esc를 눌렀을 때 modal창 종료
-        return () => window.removeEventListener('keydown', escKeyModalClose); // 위의 이벤트를 제거
+        window.addEventListener('keydown', escKeyModalClose); 
+
+        //스크롤 제어
+        if (modalFlag) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+
+        return () => {
+            window.removeEventListener('keydown', escKeyModalClose);
+            document.body.style.overflow = 'unset';
+        };
     }, [modalFlag]);
 
-
+    // modal 창 외부 클릭 시 제거
     const handleBackgroundClick = (event: MouseEvent<HTMLDivElement>) => {
         if ((event.target as HTMLDivElement).className === 'modal' && backgroundClickFlag) {
             setModalFlag(false);
@@ -55,3 +66,5 @@ export const Third = () => {
 
     )
 }
+
+export default Third

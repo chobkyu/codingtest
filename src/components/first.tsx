@@ -1,6 +1,6 @@
 import {  useState } from "react";
 
-export const First = () => {
+function First()  {
     const [number, setNumber] = useState<number>(0);
     const [square, setSquare] = useState<string[][]>([]);
     const drawSquare = (num: number) => {
@@ -43,3 +43,5 @@ export const First = () => {
         </div>
     )
 }
+
+export default First
