@@ -51,6 +51,10 @@
   color: white;
 }
 
+.btn-container {
+  text-align: right;
+}
+
 .close-btn {
   background-color: #6c757d;
   color: white;
@@ -58,7 +62,7 @@
 }
 
 .save-btn {
-  background-color: #28a745;
+  background-color: #007bff;
   color: white;
 }
 
